@@ -2,7 +2,7 @@ import './InputField.scss'
 import { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../../context/Provider'
 import React from 'react'
-const { v4: uuidv4 } = require('uuid')
+import { nanoid } from 'nanoid'
 import RegularInput from './RegularInput'
 import AdvancedInput from './AdvancedInput'
 
@@ -49,17 +49,17 @@ const InputField = ({
     return (
       await globalStore.onEdit(textToSend, comId, parentId),
       globalStore.onEditAction &&
-        (await globalStore.onEditAction({
-          userId: globalStore.currentUserData.currentUserId,
-          comId: comId,
-          avatarUrl: globalStore.currentUserData.currentUserImg,
-          userProfile: globalStore.currentUserData.currentUserProfile
-            ? globalStore.currentUserData.currentUserProfile
-            : null,
-          fullName: globalStore.currentUserData.currentUserFullName,
-          text: textToSend,
-          parentOfEditedCommentId: parentId
-        }))
+      (await globalStore.onEditAction({
+        userId: globalStore.currentUserData.currentUserId,
+        comId: comId,
+        avatarUrl: globalStore.currentUserData.currentUserImg,
+        userProfile: globalStore.currentUserData.currentUserProfile
+          ? globalStore.currentUserData.currentUserProfile
+          : null,
+        fullName: globalStore.currentUserData.currentUserFullName,
+        text: textToSend,
+        parentOfEditedCommentId: parentId
+      }))
     )
   }
 
@@ -69,18 +69,18 @@ const InputField = ({
     return (
       await globalStore.onReply(textToSend, comId, parentId, replyUuid),
       globalStore.onReplyAction &&
-        (await globalStore.onReplyAction({
-          userId: globalStore.currentUserData.currentUserId,
-          repliedToCommentId: comId,
-          avatarUrl: globalStore.currentUserData.currentUserImg,
-          userProfile: globalStore.currentUserData.currentUserProfile
-            ? globalStore.currentUserData.currentUserProfile
-            : null,
-          fullName: globalStore.currentUserData.currentUserFullName,
-          text: textToSend,
-          parentOfRepliedCommentId: parentId,
-          comId: replyUuid
-        }))
+      (await globalStore.onReplyAction({
+        userId: globalStore.currentUserData.currentUserId,
+        repliedToCommentId: comId,
+        avatarUrl: globalStore.currentUserData.currentUserImg,
+        userProfile: globalStore.currentUserData.currentUserProfile
+          ? globalStore.currentUserData.currentUserProfile
+          : null,
+        fullName: globalStore.currentUserData.currentUserFullName,
+        text: textToSend,
+        parentOfRepliedCommentId: parentId,
+        comId: replyUuid
+      }))
     )
   }
   const submitMode = async (createUuid: string, advText?: string) => {
@@ -89,29 +89,29 @@ const InputField = ({
     return (
       await globalStore.onSubmit(textToSend, createUuid),
       globalStore.onSubmitAction &&
-        (await globalStore.onSubmitAction({
-          userId: globalStore.currentUserData.currentUserId,
-          comId: createUuid,
-          avatarUrl: globalStore.currentUserData.currentUserImg,
-          userProfile: globalStore.currentUserData.currentUserProfile
-            ? globalStore.currentUserData.currentUserProfile
-            : null,
-          fullName: globalStore.currentUserData.currentUserFullName,
-          text: textToSend,
-          replies: []
-        }))
+      (await globalStore.onSubmitAction({
+        userId: globalStore.currentUserData.currentUserId,
+        comId: createUuid,
+        avatarUrl: globalStore.currentUserData.currentUserImg,
+        userProfile: globalStore.currentUserData.currentUserProfile
+          ? globalStore.currentUserData.currentUserProfile
+          : null,
+        fullName: globalStore.currentUserData.currentUserFullName,
+        text: textToSend,
+        replies: []
+      }))
     )
   }
 
   const handleSubmit = async (event: any, advText?: string) => {
     event.preventDefault()
-    const createUuid = uuidv4()
-    const replyUuid = uuidv4()
+    const createUuid = nanoid()
+    const replyUuid = nanoid()
     mode === 'editMode'
       ? editMode(advText)
       : mode === 'replyMode'
-      ? replyMode(replyUuid, advText)
-      : submitMode(createUuid, advText)
+        ? replyMode(replyUuid, advText)
+        : submitMode(createUuid, advText)
     setText('')
   }
 
