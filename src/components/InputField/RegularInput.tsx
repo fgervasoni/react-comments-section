@@ -59,7 +59,7 @@ const RegularInput = ({
         </a>
       </div>
       {globalStore.removeEmoji ? (
-        <>
+        <React.Fragment>
           <input
             className='postComment'
             style={
@@ -74,7 +74,7 @@ const RegularInput = ({
             maxLength={1000}
           />
           <p style={{ alignSelf: "end" }}>{text.length}/1000</p>
-        </>
+        </React.Fragment>
       ) : (
         <EmojiInput
           text={text}
