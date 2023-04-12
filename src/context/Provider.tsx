@@ -23,7 +23,8 @@ export const GlobalProvider = ({
   currentData,
   replyInputStyle,
   removeEmoji,
-  advancedInput
+  advancedInput,
+  isAdmin
 }: {
   children: any
   currentUser?: {
@@ -50,15 +51,15 @@ export const GlobalProvider = ({
     text: string
     userProfile?: string
     replies?:
-      | Array<{
-          userId: string
-          comId: string
-          fullName: string
-          avatarUrl: string
-          text: string
-          userProfile?: string
-        }>
-      | undefined
+    | Array<{
+      userId: string
+      comId: string
+      fullName: string
+      avatarUrl: string
+      text: string
+      userProfile?: string
+    }>
+    | undefined
   }>
   onSubmitAction?: Function
   onDeleteAction?: Function
@@ -66,6 +67,7 @@ export const GlobalProvider = ({
   onEditAction?: Function
   currentData?: Function
   advancedInput?: boolean
+  isAdmin?: boolean
 }) => {
   const [currentUserData] = useState(currentUser)
   const [data, setData] = useState<
@@ -77,15 +79,15 @@ export const GlobalProvider = ({
       text: string
       userProfile?: string
       replies?:
-        | Array<{
-            userId: string
-            comId: string
-            fullName: string
-            avatarUrl: string
-            text: string
-            userProfile?: string
-          }>
-        | undefined
+      | Array<{
+        userId: string
+        comId: string
+        fullName: string
+        avatarUrl: string
+        text: string
+        userProfile?: string
+      }>
+      | undefined
     }>
   >([])
   const [editArr, setEdit] = useState<string[]>([])
@@ -243,7 +245,8 @@ export const GlobalProvider = ({
         onEditAction: onEditAction,
         replyInputStyle: replyInputStyle,
         removeEmoji: removeEmoji,
-        advancedInput: advancedInput
+        advancedInput: advancedInput,
+        isAdmin: isAdmin,
       }}
     >
       {children}

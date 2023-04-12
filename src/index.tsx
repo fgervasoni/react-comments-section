@@ -34,6 +34,7 @@ interface CommentSectionProps {
   currentData?: Function
   removeEmoji?: boolean
   advancedInput?: boolean
+  isAdmin?: boolean
   commentData: Array<{
     userId: string
     comId: string
@@ -42,15 +43,15 @@ interface CommentSectionProps {
     text: string
     userProfile?: string
     replies?:
-      | Array<{
-          userId: string
-          comId: string
-          fullName: string
-          avatarUrl: string
-          text: string
-          userProfile?: string
-        }>
-      | undefined
+    | Array<{
+      userId: string
+      comId: string
+      fullName: string
+      avatarUrl: string
+      text: string
+      userProfile?: string
+    }>
+    | undefined
   }>
 }
 
@@ -77,7 +78,8 @@ export const CommentSection = ({
   onEditAction,
   customNoComment,
   currentData,
-  advancedInput
+  advancedInput,
+  isAdmin
 }: CommentSectionProps) => {
   return (
     <GlobalProvider
@@ -99,6 +101,7 @@ export const CommentSection = ({
       currentData={currentData}
       removeEmoji={removeEmoji}
       advancedInput={advancedInput}
+      isAdmin={isAdmin}
     >
       <CommentSectionComponent
         overlayStyle={overlayStyle}

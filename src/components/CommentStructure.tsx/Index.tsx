@@ -38,7 +38,8 @@ const CommentStructure = ({
   const optionsMenu = () => {
     return (
       <div className='userActions'>
-        {info.userId === currentUser.currentUserId && (
+        {/* {info.userId === currentUser.currentUserId && ( */}
+        {globalStore.isAdmin && (
           <Menu
             menuButton={
               <button className='actionsBtn'>
@@ -57,6 +58,7 @@ const CommentStructure = ({
             </MenuItem>
           </Menu>
         )}
+        {/* )} */}
       </div>
     )
   }
@@ -171,10 +173,10 @@ const CommentStructure = ({
       {editMode
         ? actionModeSection('edit')
         : replyMode
-        ? actionModeSection('reply')
-        : globalStore.replyTop
-        ? replyTopSection()
-        : replyBottomSection()}
+          ? actionModeSection('reply')
+          : globalStore.replyTop
+            ? replyTopSection()
+            : replyBottomSection()}
     </div>
   )
 }
