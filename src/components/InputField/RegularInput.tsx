@@ -59,18 +59,22 @@ const RegularInput = ({
         </a>
       </div>
       {globalStore.removeEmoji ? (
-        <input
-          className='postComment'
-          style={
-            mode === 'replyMode' || mode === 'editMode'
-              ? globalStore.replyInputStyle
-              : globalStore.inputStyle || inputStyle
-          }
-          type='text'
-          placeholder='Type your reply here.'
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
+        <>
+          <input
+            className='postComment'
+            style={
+              mode === 'replyMode' || mode === 'editMode'
+                ? globalStore.replyInputStyle
+                : globalStore.inputStyle || inputStyle
+            }
+            type='text'
+            placeholder='Type your reply here.'
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            maxLength={1000}
+          />
+          <p style={{ alignSelf: "end" }}>{text.length}/1000</p>
+        </>
       ) : (
         <EmojiInput
           text={text}
