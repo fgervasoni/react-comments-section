@@ -71,9 +71,9 @@ const RegularInput = ({
             placeholder='Type your reply here.'
             value={text}
             onChange={(e) => setText(e.target.value)}
-            maxLength={1000}
+            maxLength={500}
           />
-          <p style={{ alignSelf: "end" }}>{text.length}/1000</p>
+          <p style={{ alignSelf: "end" }}>{text.length}/500</p>
         </React.Fragment>
       ) : (
         <EmojiInput
